@@ -1,25 +1,31 @@
 <?php
-include "./datacontext.php";
+
+use App\Models\User;
+use AyelaORM\Database;
+use Latte\Engine;
+include __DIR__."/vendor/autoload.php"; 
+require_once __DIR__.'/router.php';
+
+$env = \Dotenv\Dotenv::createImmutable(__DIR__);
+$env->load();
 
 
-$add_submitted = isset($_POST["add"]);
-if ($add_submitted) {
-    # Input Validation and Sanitization
-    AddProduct($_POST["ProductName"], $_POST["ProductDesc"]);
-}
-Show();
+Database::setup($_ENV["DB_HOST"],$_ENV["DB_NAME"],$_ENV["DB_USERNAME"],$_ENV["DB_PASSWORD"],false);
+
+
+$user = new User();
+// $user->db_UserName = "Test User";
+// $user->db_Email = "a@gmail.com";
+// $user->db_PasswordHash = "1234567890";
+// $user->save();
+
+
+$latte = new Engine();
+//Register Route
+get("/","/src/views/home.php");
+get("/jewellery","/src/views/jewellery.php");
+get("/about","/src/views/about.php");
+
+
+
 ?>
-
-
-
-<form action="" method="POST">
-    <input type="text" name="ProductName">
-    <input type="text" name="ProductDesc">
-    <button name="add">add</button>
-</form>
-
-
-
-
-<button onclick="login()">Login</button>
-<script src="./js/main.js"></script>

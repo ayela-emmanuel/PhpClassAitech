@@ -3,15 +3,17 @@
 namespace App\Models;
 
 use AyelaORM\DatabaseObject;
+use AyelaORM\SQLIgnore;
 use AyelaORM\SQLType;
 
 class User extends DatabaseObject{
     #[SQLType("VARCHAR(100)")]
-    public string $db_UserName;
+    public string $UserName;
     #[SQLType("VARCHAR(100)")]
-    public string $db_Email;
+    public string $Email;
     #[SQLType("VARCHAR(255)")]
-    public string $db_PasswordHash;
+    public string $PasswordHash;
+
 }
 
 

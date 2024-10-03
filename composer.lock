@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ayela-emmanuel/Ayela-PHP-ORM.git",
-                "reference": "d356e20677939e61294208e33410b363a43dda60"
+                "reference": "589dfaafa588228f07f12d1ce0ba635458d1dbc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ayela-emmanuel/Ayela-PHP-ORM/zipball/d356e20677939e61294208e33410b363a43dda60",
-                "reference": "d356e20677939e61294208e33410b363a43dda60",
+                "url": "https://api.github.com/repos/ayela-emmanuel/Ayela-PHP-ORM/zipball/589dfaafa588228f07f12d1ce0ba635458d1dbc4",
+                "reference": "589dfaafa588228f07f12d1ce0ba635458d1dbc4",
                 "shasum": ""
             },
             "require": {
@@ -39,7 +39,7 @@
                 "issues": "https://github.com/ayela-emmanuel/Ayela-PHP-ORM/issues",
                 "source": "https://github.com/ayela-emmanuel/Ayela-PHP-ORM/tree/master"
             },
-            "time": "2024-09-25T17:04:07+00:00"
+            "time": "2024-09-30T17:17:49+00:00"
         },
         {
             "name": "graham-campbell/result-type",

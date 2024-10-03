@@ -11,8 +11,8 @@ $error= null;
 if(isset($_POST["Register"])){
     // Registering
     if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-        $user_ = User::getBy("Email",$email);
-        if(count($user_) == 0){
+        $user_ =  User::firstWhere(["Email"=>$email])?? null;
+        if(!$user_){
             $user = new User();
             $user->UserName = $username;
             $user->Email = $email;
@@ -34,7 +34,7 @@ if(isset($_POST["Register"])){
 
 if(isset($_POST["Login"])){
     // Logging in 
-    $user = User::getBy("UserName",$username)[0] ?? null;
+    $user = User::firstWhere(["UserName"=>$username]) ?? null;
     if($user == null){
         $error = "Credentials Not Found";
     }else{

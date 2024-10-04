@@ -22,14 +22,14 @@ $user = new User();
 
 $latte = new Engine();
 //Register Route
+
+get("/auth","/src/views/auth.php");
+any("/auth","/src/views/auth.php");
+
+
 get("/","/src/views/home.php");
 get("/jewellery","/src/views/jewellery.php");
 get("/about","/src/views/about.php");
-get("/auth","/src/views/auth.php");
-any("/auth","/src/views/auth.php");
-get("/dashboard",function (){
-    echo "Welcome";
-});
 
 
 

@@ -1,8 +1,6 @@
 <?php
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Routes\About;
-use Routes\Home;
 use Slim\Factory\AppFactory;
 
 
@@ -15,10 +13,11 @@ const templates_dir = __DIR__."/views/";
 
 
 
-$app->get('/', Home::class);
-$app->get('/bye', Home::class);
-
-$app->get("/about",About::class);
+$app->get('/', Routes\HomeController::class);
+$app->get('/bye', Routes\HomeController::class);
+$app->get("/about",Routes\AboutController::class);
+$app->get("/contact",Routes\ContactController::class. ":Index");
+$app->get("/contact_email",Routes\ContactController::class. ":ContactEmail");
 
 
 $app->run();

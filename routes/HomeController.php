@@ -12,7 +12,7 @@ class HomeController{
     public function __invoke(Request $request, Response $response, $args) {
         $user = new UserModel();
         $user -> FullName = "Emmanuel Ayela";
-;        $pageViewModel = new HomePageModel();
+        $pageViewModel = new HomePageModel();
         $pageViewModel->user = $user; 
 
         $output = latte->renderToString($this->HomeTemplate,

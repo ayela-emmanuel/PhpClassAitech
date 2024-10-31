@@ -1,1 +1,8 @@
-<h1>Home Page {$user->FullName}</h1>
+{layout 'layouts/mainlayout.latte'}
+
+{block title}My amazing blog{/block}
+
+{block content}
+    <h1>Home Page {$user->FullName}</h1>
+	<p>Welcome to my awesome homepage.</p>
+{/block}

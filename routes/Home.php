@@ -6,7 +6,10 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class Home{
     public function __invoke(Request $request, Response $response, $args) {
-        $response->getBody()->write("HomePage");
+        echo latte->renderToString(templates_dir.'template.latte',[
+            "someData"=>"We Are Here"
+        ]);
+        //$response->getBody()->write($output);
         return $response;
     }
 }

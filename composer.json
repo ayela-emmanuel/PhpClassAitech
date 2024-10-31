@@ -3,7 +3,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Lilwi\\FlowerShop\\": "src/",
+            "App\\": "src/",
             "Routes\\": "routes/"
         }
     },
@@ -16,6 +16,7 @@
     "require": {
         "ayela-emmanuel/ayela-orm": "^1.0",
         "slim/slim": "4.*",
-        "slim/psr7": "^1.7"
+        "slim/psr7": "^1.7",
+        "latte/latte": "^3.0"
     }
 }

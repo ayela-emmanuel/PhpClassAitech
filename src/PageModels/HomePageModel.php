@@ -5,7 +5,6 @@ use App\Models\UserModel;
 
 class HomePageModel{
     public UserModel $user;
-    
 }
 
 

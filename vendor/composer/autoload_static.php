@@ -332,6 +332,7 @@ class ComposerStaticInit98e688ea59809c1dfcee6fabb3fa0949
         'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/src/LoggerTrait.php',
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/src/NullLogger.php',
         'Routes\\AboutController' => __DIR__ . '/../..' . '/routes/AboutController.php',
+        'Routes\\AuthController' => __DIR__ . '/../..' . '/routes/AuthController.php',
         'Routes\\ContactController' => __DIR__ . '/../..' . '/routes/ContactController.php',
         'Routes\\HomeController' => __DIR__ . '/../..' . '/routes/HomeController.php',
         'Slim\\App' => __DIR__ . '/..' . '/slim/slim/Slim/App.php',

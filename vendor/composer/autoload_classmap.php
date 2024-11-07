@@ -242,6 +242,7 @@ return array(
     'Psr\\Log\\LoggerTrait' => $vendorDir . '/psr/log/src/LoggerTrait.php',
     'Psr\\Log\\NullLogger' => $vendorDir . '/psr/log/src/NullLogger.php',
     'Routes\\AboutController' => $baseDir . '/routes/AboutController.php',
+    'Routes\\AuthController' => $baseDir . '/routes/AuthController.php',
     'Routes\\ContactController' => $baseDir . '/routes/ContactController.php',
     'Routes\\HomeController' => $baseDir . '/routes/HomeController.php',
     'Slim\\App' => $vendorDir . '/slim/slim/Slim/App.php',

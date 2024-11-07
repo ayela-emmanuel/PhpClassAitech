@@ -1,0 +1,17 @@
+{layout 'layouts/mainlayout.latte'}
+
+{block title}My amazing blog{/block}
+
+{block content}
+    <h1>Auth Page </h1>
+    <h3> {$Message ?? ""} </h3>
+
+	<form method="POST">
+        <input type="text" name="FullName" placeholder="FullName" required /><br/>
+        <input type="text" name="UserName" placeholder="UserName" required /><br/>
+        <input type="email" name="Email" placeholder="Email" required /><br/>
+        <input type="tel" name="Phone" placeholder="Phone" required /><br/>
+        <input type="password" name="Password" placeholder="Password" required /><br/>
+        <button name="reg">submit</button>
+    </form> 
+{/block}

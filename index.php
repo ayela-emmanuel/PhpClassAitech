@@ -5,6 +5,7 @@ use Slim\Factory\AppFactory;
 require __DIR__ . '/vendor/autoload.php';
 
 require_once __DIR__."/includes/connection.php";
+require_once __DIR__."/includes/constants.php";
 
 $app = AppFactory::create();
 const latte = new Latte\Engine;

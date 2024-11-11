@@ -1,3 +1,51 @@
 body{
-    background-color: aqua;
+    margin: 0px;
 }
+
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 14px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.234);
+}
+/* nav logo */
+nav>img{
+    height: 80px;
+    width: 80px;
+}
+/* nav items */
+nav>ul{
+    display: flex;
+    list-style: none;
+    padding-inline-start: 0px;
+}
+nav>ul>li{
+    margin: 5px;
+    padding: 5px 10px;
+}
+
+
+
+
+/* input and buttons */
+
+input{
+    outline: none;
+    border: none;
+    background-color: rgb(227, 227, 227);
+    padding: 8px 10px;
+    border-radius: 5px;
+}
+
+button{
+    outline: none;
+    border: none;
+    background-color: rgb(0, 157, 255);
+    padding: 8px 10px;
+    border-radius: 5px;
+    color: white;
+    
+}
+

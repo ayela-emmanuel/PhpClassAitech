@@ -8,15 +8,12 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 
 class HomeController{
-    private string $HomeTemplate = templates_dir.'template.latte';
+    private string $HomeTemplate = templates_dir.'home.latte';
     public function __invoke(Request $request, Response $response, $args) {
-        $user = new UserModel();
-        $user -> FullName = "Emmanuel Ayela";
-        $pageViewModel = new HomePageModel();
-        $pageViewModel->user = $user; 
+        
 
         $output = latte->renderToString($this->HomeTemplate,
-        $pageViewModel);
+        $this);
         $response->getBody()->write($output);
         return $response;
     }

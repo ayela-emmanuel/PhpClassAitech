@@ -35,12 +35,6 @@ class AuthController{
         $Phone = $data["Phone"] ?? null;
         $Password = $data["Password"] ?? null;
         
-
-
-        
-        
-
-
         $isValidFullName = preg_match(FullNameValidationPattern, $FullName);
         $isValidUserName = preg_match(UserNameValidationPattern, $UserName);
         $isValidPhone = preg_match(PhoneValidationPattern, $Phone);

@@ -8,44 +8,36 @@
 
 
 <!-- Hero -->
- <section>
-    <div></div>
+ <section id="HeroContainer">
+    <span></span>
     <div>
         <h1>SHOPPER VISION</h1>
         <p>motto motto motto motto motto</p>
         <div>
-            <button>Register</button>
-            <button>Login</button>
+            <button onclick="GoToAuth()">Register</button>
+            <button onclick="GoToAuth()">Login</button>
         </div>
     </div>
  </section>
 
 <!-- Products -->
-<section>
+<section id="ProductsContainer">
+    <h1>Products</h1>
 
-    <div>
-        <img src="" alt="">
-        <h4>Product Title </h4>
-        <p>desc</p>
-        <p>1000 NGN</p>
-        <div>
-            <button>Add To Cart</button>
-            <button>Buy Now</button>
+    <section>
+        {for $i = 0; $i < 4; $i++}
+        <div class="product-card">
+            <img src="/static/images/product.avif" alt="">
+            <h4>Product Title </h4>
+            <p>desc</p>
+            <p>1000 NGN</p>
+            <div>
+                <button>Add To Cart</button>
+                <button>Buy Now</button>
+            </div>
         </div>
-    </div>
-
-
-    <div>
-        <img src="" alt="">
-        <h4>Product Title </h4>
-        <p>desc</p>
-        <p>1000 NGN</p>
-        <div>
-            <button>Add To Cart</button>
-            <button>Buy Now</button>
-        </div>
-    </div>
-
+        {/for}
+    </section>
 </section>
 
 

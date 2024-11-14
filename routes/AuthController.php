@@ -26,8 +26,44 @@ class AuthController{
     }
 
 
+
+
+
     public function FormSubmitted(Request $request,Response $response, $args){
         $data = $request->getParsedBody();
+        if(isset($data["login"])){
+            $Email = $data["Email"] ?? null;
+            $Password = $data["Password"] ?? "";
+            // Get User Data
+            $query = "SELECT `id`, `username`, `password`, `role` from `users` WHERE `email` = ?";
+            $stmt = DB->prepare($query);
+            if($stmt->execute([$Email])){
+                $result = $stmt->get_result();
+                $userData = $result->fetch_assoc();
+                if($userData ){
+                    if(password_verify($Password,$userData["password"])){
+                        $userData["password"] = null;
+                        $_SESSION["User"] = $userData;
+                        $response = $response->withHeader("Location", "/dashboard")->withStatus(302);
+                    }else {
+                        $this->Message = "Incorrect Password";
+                    }
+                }else{
+                    $this->Message = "User Not Found!";
+                }
+            }else{
+                $this->Message = "User Not Found!";
+            }
+            // Validate Password
+            // Save in Session
+
+            $page = latte->renderToString($this->AuthTemplate,$this);
+            $response->getBody()->write($page);
+            return $response;
+        }
+        
+
+
         $FilterPassed = true;
         $FullName = $data["FullName"] ?? null;
         $UserName = $data["UserName"] ?? null;
@@ -55,7 +91,7 @@ class AuthController{
             $this->Message .= "Invalid Phone Number, ";
             $FilterPassed = false;
         }
-        if(!$isValidPassword){
+        if(false){
             $this->Message .= "Invalid Password, Your Password requires at least one uppercase letter, one lowercase letter, one number, and one special character, with a minimum length of 8 characters";
             $FilterPassed = false;
         }
@@ -76,7 +112,7 @@ class AuthController{
                     $UserName,
                     $Email,
                     $Phone,
-                    $Password,
+                    password_hash($Password, PASSWORD_DEFAULT) ,
                     "user"
                 ]);
                 //check if qery was executed with no hitch

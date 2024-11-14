@@ -334,6 +334,7 @@ class ComposerStaticInit98e688ea59809c1dfcee6fabb3fa0949
         'Routes\\AboutController' => __DIR__ . '/../..' . '/routes/AboutController.php',
         'Routes\\AuthController' => __DIR__ . '/../..' . '/routes/AuthController.php',
         'Routes\\ContactController' => __DIR__ . '/../..' . '/routes/ContactController.php',
+        'Routes\\DashboardController' => __DIR__ . '/../..' . '/routes/DashboardController.php',
         'Routes\\HomeController' => __DIR__ . '/../..' . '/routes/HomeController.php',
         'Slim\\App' => __DIR__ . '/..' . '/slim/slim/Slim/App.php',
         'Slim\\CallableResolver' => __DIR__ . '/..' . '/slim/slim/Slim/CallableResolver.php',

@@ -244,6 +244,7 @@ return array(
     'Routes\\AboutController' => $baseDir . '/routes/AboutController.php',
     'Routes\\AuthController' => $baseDir . '/routes/AuthController.php',
     'Routes\\ContactController' => $baseDir . '/routes/ContactController.php',
+    'Routes\\DashboardController' => $baseDir . '/routes/DashboardController.php',
     'Routes\\HomeController' => $baseDir . '/routes/HomeController.php',
     'Slim\\App' => $vendorDir . '/slim/slim/Slim/App.php',
     'Slim\\CallableResolver' => $vendorDir . '/slim/slim/Slim/CallableResolver.php',

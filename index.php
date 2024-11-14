@@ -20,6 +20,7 @@ $app->get("/about",Routes\AboutController::class);
 $app->get("/contact",Routes\ContactController::class. ":Index");
 $app->get("/auth",Routes\AuthController::class. ":Index");
 $app->post("/auth",Routes\AuthController::class. ":FormSubmitted");
+$app->get("/logout",Routes\AuthController::class. ":Logout");
 
 $app->get("/contact_email",Routes\ContactController::class. ":ContactEmail");
 

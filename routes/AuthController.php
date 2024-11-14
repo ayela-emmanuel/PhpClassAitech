@@ -25,7 +25,13 @@ class AuthController{
         return $response;
     }
 
-
+    public function Logout(Request $request,Response $response, $args){
+        $_SESSION["User"] = null;
+        session_destroy();
+        $response = $response->withHeader("Location", "/auth")->withStatus(302);
+        $response->getBody();
+        return $response;
+    }
 
 
 

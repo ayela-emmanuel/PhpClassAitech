@@ -25,6 +25,9 @@ $app->get("/logout",Routes\AuthController::class. ":Logout");
 $app->get("/contact_email",Routes\ContactController::class. ":ContactEmail");
 
 
+///Products
+$app->post("/api/products/create",Routes\ProductsController::class. ":Create");
+
 
 
 

@@ -14,8 +14,19 @@
         <a href="#">Link</a>
     </div>
     <div id="maincontent">
-        <h1>Hello World</h1> 
-        {$data}
+        <h1>Create Product</h1> 
+        
+        <form method="post" enctype="multipart/form-data" id="create-product-id">
+            <input type="text" name="name" placeholder="name" /><br>
+            <input type="text" name="image" placeholder="image" /><br>
+            <input type="text" name="price" placeholder="price" /><br>
+            <input type="text" name="desc" placeholder="desc" /><br>
+            <button type="button" onclick="CreateProduct()">
+                Submit
+            </button>
+        </form>
+        
+
     </div>
 </section>
 

@@ -4,9 +4,12 @@ namespace Routes;
 use App\Models\UserModel;
 use Slim\Psr7\Response;
 use Slim\Psr7\Request;
+use Slim\Http\UploadedFile;
+
 
 const NumPerPage = 10;
 const GetAllQuery = "SELECT * from `products` WHERE 1 LIMIT ".NumPerPage." OFFSET ?";
+const GetByUserIdQuery = "SELECT * from `products` WHERE `seller_id` = ? LIMIT ".NumPerPage." OFFSET ?";
 const GetByIdQuery = "SELECT * from `products` WHERE `id` = ? ";
 const DeleteByIdQuery = "DELETE from `products` WHERE `id` = ? ";
 const UpdateQuery = "UPDATE `products` SET `name` = ?, `image` = ?, `price` = ?, `desc` = ?";
@@ -45,8 +48,16 @@ class ProductsController{
 
     public function GetAll(Request $request, Response $res)
     {
+        $page = $_GET["page"] ?? 1;
+        $offset = ($page - 1) * NumPerPage;
+        $stmt = DB->prepare(GetAllQuery);
+        $out = "[]";
+        if($stmt->execute([$offset])){
+            $request = $stmt->get_result();
+            $data = $request->fetch_all(MYSQLI_ASSOC);
+            $out = json_encode($data);
+        }
         header("content-type: application/json");
-        $out = "{}"; 
         $res->getBody()->write($out);
         return $res;
     }
@@ -54,8 +65,17 @@ class ProductsController{
 
     public function MyProducts(Request $request, Response $res)
     {
+        $page = $_GET["page"] ?? 1;
+        $offset = ($page - 1) * NumPerPage;
+        $stmt = DB->prepare(GetByUserIdQuery);
+        $out = "[]";
+        $sid = $_SESSION["User"]['id'];
+        if($stmt->execute([$_SESSION["User"]['id'],$offset])){
+            $request = $stmt->get_result();
+            $data = $request->fetch_all(MYSQLI_ASSOC);
+            $out = json_encode($data);
+        }
         header("content-type: application/json");
-        $out = "{}"; 
         $res->getBody()->write($out);
         return $res;
     }
@@ -63,27 +83,35 @@ class ProductsController{
 
     public function Create(Request $request, Response $res)
     {
+        $uploadDir = __DIR__."/../static/uploads";
         $data = $request->getParsedBody();
         //$data = json_decode(file_get_contents("php://input"),true);
         $name = $data["name"] ?? null;
-        $image = $data["image"] ?? null;
+        //$image = $data["image"] ?? null;
+        $image = $_FILES["image"]??null;
         $price = $data["price"] ?? null;
         $desc = $data["desc"] ?? null;
         $seller_id = $_SESSION["User"]['id'];
         $out = [];
 
-        if(isset($name,$image,$price,$desc)){
-            $stmt = DB->prepare(CreateQuery);
-            $result =$stmt->execute([$name,$image,$price,$desc,$seller_id]);
-            if($result){
-                $out["message"] = "Created";
+        if ($image["error"] == 0) {
+            $image_name = $image["name"];
+            $filename = move_uploaded_file($uploadDir, $image["tmp_name"]);
+            
+            if(isset($name,$image,$price,$desc)){
+                $stmt = DB->prepare(CreateQuery);
+                $result =$stmt->execute([$name,"/static/uploads/".$image_name,$price,$desc,$seller_id]);
+                if($result){
+                    $out["message"] = "Created";
+                }else{
+                    $out["message"] = "Failed To Create";
+                }
             }else{
-                $out["message"] = "Failed To Create";
+                $out["message"] = "Missing Param";
             }
         }else{
-            $out["message"] = "Missing Param";
+            $out["message"] = "Failed To Upload";
         }
-
 
         header("content-type: application/json");
         
@@ -101,8 +129,16 @@ class ProductsController{
 
     public function Delete(Request $request, Response $res)
     {
+        $product_id = $_GET["id"]??null;
+        $stmt = DB->prepare(DeleteByIdQuery);
+        $out = "{}";
+        if(!$product_id){
+            header("content-type: application/json");
+            $res->getBody()->write($out);
+            return $res;
+        }
+        $stmt->execute([$product_id]);
         header("content-type: application/json");
-        $out = "{}"; 
         $res->getBody()->write($out);
         return $res;
     }

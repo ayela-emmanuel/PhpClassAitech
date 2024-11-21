@@ -18,16 +18,35 @@
         
         <form method="post" enctype="multipart/form-data" id="create-product-id">
             <input type="text" name="name" placeholder="name" /><br>
-            <input type="text" name="image" placeholder="image" /><br>
+            <input type="file" name="image" placeholder="image" /><br>
             <input type="text" name="price" placeholder="price" /><br>
             <input type="text" name="desc" placeholder="desc" /><br>
             <button type="button" onclick="CreateProduct()">
                 Submit
             </button>
         </form>
-        
+        <!-- Products -->
+        <section id="ProductsContainer">
+            <h1>Products</h1>
+
+            <section id="products_container_seller">
+                {for $i = 0; $i < 4; $i++}
+                <div class="product-card">
+                    <img src="/static/images/product.avif" alt="">
+                    <h4>Product Title </h4>
+                    <p>desc</p>
+                    <p>1000 NGN</p>
+                    <div>
+                        <button>Add To Cart</button>
+                        <button>Buy Now</button>
+                    </div>
+                </div>
+                {/for}
+            </section>
+        </section>
 
     </div>
+
 </section>
 
 

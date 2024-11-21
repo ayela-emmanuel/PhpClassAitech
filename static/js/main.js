@@ -1,5 +1,10 @@
 
 
+
+var UpdateSection = document.getElementById("UpdateSection");
+if(UpdateSection){
+    UpdateSection.style.display = "none"
+}
 function CreateProduct(){
     var form =  document.querySelector("#create-product-id")
 
@@ -17,12 +22,32 @@ function CreateProduct(){
     })
 
 }
+
+function UpdateProduct(){
+    var form = document.forms["update-product"]
+    
+    var product = new FormData(form);
+
+    fetch("/api/products/update",{
+        method:"POST",
+        body: product
+    }).then((response)=>{
+        return response.json();
+    })
+    .then((data)=>{
+        alert(data.message)
+        PopulateProducts("products_container_seller","/api/products/my",1 , true)
+        ClearUpdateForm()
+    })
+
+}
+
 function GenerateProductCard(image, title, desc, price, id, isAdmin = false){
     var btns = isAdmin ? 
     `
     <div>
         <button onclick="DeleteProduct(${id})">Delete</button>
-        <button>Update</button>
+        <button onclick='PopulateUpdateForm("${image}","${title}", "${desc}", "${price}", "${id}")' >Update</button>
     </div>
     `
     : 
@@ -70,5 +95,25 @@ function PopulateProducts(containerId, url = "/api/products/all", page = 1, isAd
         });
     })
 }
+
+function PopulateUpdateForm(image, title, desc, price, id){
+    var form = document.forms["update-product"]
+    form["id"].value = id;
+    form["name"].value = title;
+    form["price"].value = price;
+    form["desc"].value = desc;
+    UpdateSection.style.display = "block"
+}
+
+
+function ClearUpdateForm(){
+    var form = document.forms["update-product"]
+    form["id"].value = "";
+    form["name"].value = "";
+    form["price"].value = "";
+    form["desc"].value = "";
+    UpdateSection.style.display = "none"
+}
+
 PopulateProducts("products_container")
 PopulateProducts("products_container_seller","/api/products/my",1 , true)

@@ -133,28 +133,32 @@ class ProductsController{
         $image = $_FILES["image"]??null;
         $price = $_POST["price"] ?? null;
         $desc = $_POST["desc"] ?? null;
+        $id = $_POST["id"] ?? null;
+        if($id == null){
+            exit;
+        }
 
         if($image != null){
             $image_name = uniqid("FILE_").".".pathinfo( $image["name"], PATHINFO_EXTENSION);
             //FILE_3456789dsf.png
             $result = move_uploaded_file($image["tmp_name"],$uploadDir. "/" . $image_name );
-            $stmt = DB->prepare("UPDATE `products` SET `image` = ?");
-            $stmt->execute([$image_name]);
+            $stmt = DB->prepare("UPDATE `products` SET `image` = ? WHERE id = ?");
+            $stmt->execute(["/static/uploads/".$image_name, $id]);
         }
 
         if($name != null){
-            $stmt = DB->prepare("UPDATE `products` SET `name` = ?");
-            $stmt->execute([$name]);
+            $stmt = DB->prepare("UPDATE `products` SET `name` = ? WHERE id = ?");
+            $stmt->execute([$name, $id]);
         }
 
         if($price != null && filter_var($price,FILTER_SANITIZE_NUMBER_FLOAT)){
-            $stmt = DB->prepare("UPDATE `products` SET `price` = ?");
-            $stmt->execute([$price]);
+            $stmt = DB->prepare("UPDATE `products` SET `price` = ? WHERE id = ?");
+            $stmt->execute([$price, $id]);
         }
 
         if($desc != null){
-            $stmt = DB->prepare("UPDATE `products` SET `desc` = ?");
-            $stmt->execute([$desc]);
+            $stmt = DB->prepare("UPDATE `products` SET `desc` = ? WHERE id = ?");
+            $stmt->execute([$desc, $id]);
         }
 
         header("content-type: application/json");

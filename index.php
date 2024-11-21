@@ -26,7 +26,7 @@ $app->get("/contact_email",Routes\ContactController::class. ":ContactEmail");
 
 
 ///Products
-$app->post("/api/products/update",Routes\ProductsController::class. ":Create");
+$app->post("/api/products/update",Routes\ProductsController::class. ":Update");
 $app->post("/api/products/create",Routes\ProductsController::class. ":Create");
 $app->delete("/api/products/delete",Routes\ProductsController::class. ":Delete");
 $app->get("/api/products/all",Routes\ProductsController::class. ":GetAll");

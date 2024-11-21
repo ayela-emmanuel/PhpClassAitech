@@ -25,6 +25,22 @@
                 Submit
             </button>
         </form>
+
+
+        <div id="UpdateSection">
+            <h1>Update Product</h1> 
+        
+            <form method="post" enctype="multipart/form-data" name="update-product">
+                <input type="text" name="id" hidden /><br>
+                <input type="text" name="name" placeholder="name" /><br>
+                <input type="file" name="image" placeholder="image" /><br>
+                <input type="text" name="price" placeholder="price" /><br>
+                <input type="text" name="desc" placeholder="desc" /><br>
+                <button type="button" onclick="UpdateProduct()">
+                    Submit
+                </button>
+            </form>
+        </div>
         <!-- Products -->
         <section id="ProductsContainer">
             <h1>Products</h1>

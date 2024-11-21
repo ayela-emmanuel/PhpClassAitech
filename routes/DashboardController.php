@@ -13,7 +13,9 @@ class DashboardController{
 
 
     public $data;
+    public $user;
     public function __invoke(Request $request, Response $response, $args) {
+        
         ///if not loggedin goto auth
         if(!isset($_SESSION["User"])){
             $response = $response->withHeader("Location", "/auth")->withStatus(302);
@@ -22,7 +24,7 @@ class DashboardController{
             $response = $response->withHeader("Location", "/auth")->withStatus(302);
             return $response;
         }
-
+        $this->user = $_SESSION["User"];
         $output = latte->renderToString($this->DashboardTemplate,
         $this);
         $response->getBody()->write($output);

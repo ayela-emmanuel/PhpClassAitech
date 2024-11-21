@@ -95,20 +95,26 @@ class ProductsController{
         $out = [];
 
         if ($image["error"] == 0) {
-            $image_name = $image["name"];
-            $filename = move_uploaded_file($uploadDir, $image["tmp_name"]);
-            
-            if(isset($name,$image,$price,$desc)){
-                $stmt = DB->prepare(CreateQuery);
-                $result =$stmt->execute([$name,"/static/uploads/".$image_name,$price,$desc,$seller_id]);
-                if($result){
-                    $out["message"] = "Created";
+            $image_name = uniqid("FILE_").".".pathinfo( $image["name"], PATHINFO_EXTENSION);
+            //FILE_3456789dsf.png
+
+            $result = move_uploaded_file($image["tmp_name"],$uploadDir. "/" . $image_name );
+            if($result){
+                if(isset($name,$image,$price,$desc)){
+                    $stmt = DB->prepare(CreateQuery);
+                    $result =$stmt->execute([$name,"/static/uploads/".$image_name,$price,$desc,$seller_id]);
+                    if($result){
+                        $out["message"] = "Created";
+                    }else{
+                        $out["message"] = "Failed To Create";
+                    }
                 }else{
-                    $out["message"] = "Failed To Create";
+                    $out["message"] = "Missing Param";
                 }
             }else{
-                $out["message"] = "Missing Param";
+                $out["message"] = "Failed To Process Uploaded File";
             }
+            
         }else{
             $out["message"] = "Failed To Upload";
         }
@@ -121,6 +127,36 @@ class ProductsController{
 
     public function Update(Request $request, Response $res)
     {
+        $uploadDir = __DIR__."/../static/uploads";
+
+        $name = $_POST["name"] ?? null;
+        $image = $_FILES["image"]??null;
+        $price = $_POST["price"] ?? null;
+        $desc = $_POST["desc"] ?? null;
+
+        if($image != null){
+            $image_name = uniqid("FILE_").".".pathinfo( $image["name"], PATHINFO_EXTENSION);
+            //FILE_3456789dsf.png
+            $result = move_uploaded_file($image["tmp_name"],$uploadDir. "/" . $image_name );
+            $stmt = DB->prepare("UPDATE `products` SET `image` = ?");
+            $stmt->execute([$image_name]);
+        }
+
+        if($name != null){
+            $stmt = DB->prepare("UPDATE `products` SET `name` = ?");
+            $stmt->execute([$name]);
+        }
+
+        if($price != null && filter_var($price,FILTER_SANITIZE_NUMBER_FLOAT)){
+            $stmt = DB->prepare("UPDATE `products` SET `price` = ?");
+            $stmt->execute([$price]);
+        }
+
+        if($desc != null){
+            $stmt = DB->prepare("UPDATE `products` SET `desc` = ?");
+            $stmt->execute([$desc]);
+        }
+
         header("content-type: application/json");
         $out = "{}"; 
         $res->getBody()->write($out);
